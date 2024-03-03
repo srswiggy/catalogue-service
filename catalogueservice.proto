@@ -8,6 +8,11 @@ service RestaurantService {
   rpc GetAll(NoParams) returns (RestaurantListResponse);
 }
 
+service MenuItemsService {
+  rpc CreateMultiple(ItemsListRequest) returns (ItemsListResponse);
+  rpc GetByRestaurantId(RestaurantIdRequest) returns (ItemsListResponse);
+}
+
 message NoParams {}
 
 message RestaurantRequest {
@@ -25,4 +30,22 @@ message RestaurantIdRequest {
 
 message RestaurantListResponse {
   repeated RestaurantResponse restaurants = 1;
+}
+
+message ItemRequest {
+  string name = 1;
+}
+
+message ItemsListRequest {
+  int64 restaurantId = 1;
+  repeated ItemRequest items = 2;
+}
+
+message ItemResponse {
+  int64 id = 1;
+  string name = 2;
+}
+
+message ItemsListResponse {
+  repeated ItemResponse items = 1;
 }

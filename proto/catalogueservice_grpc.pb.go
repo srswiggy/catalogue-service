@@ -175,3 +175,125 @@ var RestaurantService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "catalogueservice.proto",
 }
+
+// MenuItemsServiceClient is the client API for MenuItemsService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MenuItemsServiceClient interface {
+	CreateMultiple(ctx context.Context, in *ItemsListRequest, opts ...grpc.CallOption) (*ItemsListResponse, error)
+	GetByRestaurantId(ctx context.Context, in *RestaurantIdRequest, opts ...grpc.CallOption) (*ItemsListResponse, error)
+}
+
+type menuItemsServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMenuItemsServiceClient(cc grpc.ClientConnInterface) MenuItemsServiceClient {
+	return &menuItemsServiceClient{cc}
+}
+
+func (c *menuItemsServiceClient) CreateMultiple(ctx context.Context, in *ItemsListRequest, opts ...grpc.CallOption) (*ItemsListResponse, error) {
+	out := new(ItemsListResponse)
+	err := c.cc.Invoke(ctx, "/MenuItemsService/CreateMultiple", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *menuItemsServiceClient) GetByRestaurantId(ctx context.Context, in *RestaurantIdRequest, opts ...grpc.CallOption) (*ItemsListResponse, error) {
+	out := new(ItemsListResponse)
+	err := c.cc.Invoke(ctx, "/MenuItemsService/GetByRestaurantId", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MenuItemsServiceServer is the server API for MenuItemsService service.
+// All implementations must embed UnimplementedMenuItemsServiceServer
+// for forward compatibility
+type MenuItemsServiceServer interface {
+	CreateMultiple(context.Context, *ItemsListRequest) (*ItemsListResponse, error)
+	GetByRestaurantId(context.Context, *RestaurantIdRequest) (*ItemsListResponse, error)
+	mustEmbedUnimplementedMenuItemsServiceServer()
+}
+
+// UnimplementedMenuItemsServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMenuItemsServiceServer struct {
+}
+
+func (UnimplementedMenuItemsServiceServer) CreateMultiple(context.Context, *ItemsListRequest) (*ItemsListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateMultiple not implemented")
+}
+func (UnimplementedMenuItemsServiceServer) GetByRestaurantId(context.Context, *RestaurantIdRequest) (*ItemsListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetByRestaurantId not implemented")
+}
+func (UnimplementedMenuItemsServiceServer) mustEmbedUnimplementedMenuItemsServiceServer() {}
+
+// UnsafeMenuItemsServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MenuItemsServiceServer will
+// result in compilation errors.
+type UnsafeMenuItemsServiceServer interface {
+	mustEmbedUnimplementedMenuItemsServiceServer()
+}
+
+func RegisterMenuItemsServiceServer(s grpc.ServiceRegistrar, srv MenuItemsServiceServer) {
+	s.RegisterService(&MenuItemsService_ServiceDesc, srv)
+}
+
+func _MenuItemsService_CreateMultiple_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ItemsListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MenuItemsServiceServer).CreateMultiple(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/MenuItemsService/CreateMultiple",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MenuItemsServiceServer).CreateMultiple(ctx, req.(*ItemsListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MenuItemsService_GetByRestaurantId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestaurantIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MenuItemsServiceServer).GetByRestaurantId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/MenuItemsService/GetByRestaurantId",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MenuItemsServiceServer).GetByRestaurantId(ctx, req.(*RestaurantIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// MenuItemsService_ServiceDesc is the grpc.ServiceDesc for MenuItemsService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var MenuItemsService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "MenuItemsService",
+	HandlerType: (*MenuItemsServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateMultiple",
+			Handler:    _MenuItemsService_CreateMultiple_Handler,
+		},
+		{
+			MethodName: "GetByRestaurantId",
+			Handler:    _MenuItemsService_GetByRestaurantId_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "catalogueservice.proto",
+}

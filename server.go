@@ -3,6 +3,7 @@ package main
 import (
 	"catalogueservice/models"
 	pb "catalogueservice/proto"
+	"catalogueservice/services"
 	"google.golang.org/grpc"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -24,7 +25,7 @@ func databaseConn() *gorm.DB {
 		log.Fatalf("error connecting to database: %s", err)
 	}
 
-	err = db.AutoMigrate(&models.Restaurant{})
+	err = db.AutoMigrate(&models.Restaurant{}, &models.MenuItem{})
 	if err != nil {
 		return nil
 	}
@@ -44,7 +45,8 @@ func main() {
 
 	grpcServer := grpc.NewServer()
 
-	pb.RegisterRestaurantServiceServer(grpcServer, &restaurantService{database: db})
+	pb.RegisterRestaurantServiceServer(grpcServer, &services.RestaurantService{Database: db})
+	pb.RegisterMenuItemsServiceServer(grpcServer, &services.MenuItemsService{Database: db})
 
 	log.Println("Listening to port", port)
 
