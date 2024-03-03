@@ -4,6 +4,7 @@ import (
 	"catalogueservice/models"
 	pb "catalogueservice/proto"
 	"catalogueservice/services"
+	"catalogueservice/utils"
 	"google.golang.org/grpc"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -43,7 +44,8 @@ func main() {
 		log.Fatalf("Error listening to port: %s", err)
 	}
 
-	grpcServer := grpc.NewServer()
+	grpcServer := grpc.NewServer(
+		grpc.UnaryInterceptor(utils.BasicAuthInteceptor))
 
 	pb.RegisterRestaurantServiceServer(grpcServer, &services.RestaurantService{Database: db})
 	pb.RegisterMenuItemsServiceServer(grpcServer, &services.MenuItemsService{Database: db})
