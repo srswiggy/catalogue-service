@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "/catalogueservice";
+
+service RestaurantService {
+  rpc Create(RestaurantRequest) returns (RestaurantResponse);
+  rpc Get(RestaurantIdRequest) returns (RestaurantResponse);
+  rpc GetAll(NoParams) returns (RestaurantListResponse);
+}
+
+message NoParams {}
+
+message RestaurantRequest {
+  string name = 1;
+}
+
+message RestaurantResponse {
+  int64 id = 1;
+  string name = 2;
+}
+
+message RestaurantIdRequest {
+  int64 id = 1;
+}
+
+message RestaurantListResponse {
+  repeated RestaurantResponse restaurants = 1;
+}
