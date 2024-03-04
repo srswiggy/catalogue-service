@@ -7,4 +7,5 @@ type MenuItem struct {
 	ID           int64 `gorm:"primaryKey"`
 	Name         string
 	RestaurantID int64
+	Price        float32
 }

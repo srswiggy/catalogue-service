@@ -41,7 +41,7 @@ message RestaurantListResponse {
 
 message ItemRequest {
   string name = 1;
-  string price = 2;
+  float price = 2;
 }
 
 message ItemsListRequest {
@@ -52,7 +52,7 @@ message ItemsListRequest {
 message ItemResponse {
   int64 id = 1;
   string name = 2;
-  string price = 3;
+  float price = 3;
 }
 
 message ItemsListResponse {

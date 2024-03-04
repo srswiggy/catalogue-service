@@ -16,7 +16,7 @@ func (server *MenuItemsService) CreateMultiple(ctx context.Context, req *pb.Item
 	var menuItems []*models.MenuItem
 
 	for _, itemReq := range req.Items {
-		menuItems = append(menuItems, &models.MenuItem{Name: itemReq.Name, RestaurantID: req.RestaurantId})
+		menuItems = append(menuItems, &models.MenuItem{Name: itemReq.Name, Price: itemReq.Price, RestaurantID: req.RestaurantId})
 	}
 
 	server.Database.Create(menuItems)
@@ -24,7 +24,7 @@ func (server *MenuItemsService) CreateMultiple(ctx context.Context, req *pb.Item
 	var itemsResponseList []*pb.ItemResponse
 
 	for _, item := range menuItems {
-		itemsResponseList = append(itemsResponseList, &pb.ItemResponse{Id: item.ID, Name: item.Name})
+		itemsResponseList = append(itemsResponseList, &pb.ItemResponse{Id: item.ID, Name: item.Name, Price: item.Price})
 	}
 
 	return &pb.ItemsListResponse{
@@ -39,7 +39,7 @@ func (server *MenuItemsService) GetByRestaurantId(ctx context.Context, req *pb.R
 	var itemsResponseList []*pb.ItemResponse
 
 	for _, item := range menuItems {
-		itemsResponseList = append(itemsResponseList, &pb.ItemResponse{Id: item.ID, Name: item.Name})
+		itemsResponseList = append(itemsResponseList, &pb.ItemResponse{Id: item.ID, Name: item.Name, Price: item.Price})
 	}
 
 	return &pb.ItemsListResponse{
