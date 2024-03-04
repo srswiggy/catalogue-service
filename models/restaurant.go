@@ -4,7 +4,8 @@ import "gorm.io/gorm"
 
 type Restaurant struct {
 	gorm.Model
-	ID        int64 `gorm:"primaryKey"`
-	Name      string
+	ID   int64 `gorm:"primaryKey"`
+	Name string
+	Location
 	MenuItems []MenuItem
 }
