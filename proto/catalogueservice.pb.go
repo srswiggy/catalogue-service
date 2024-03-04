@@ -58,18 +58,74 @@ func (*NoParams) Descriptor() ([]byte, []int) {
 	return file_catalogueservice_proto_rawDescGZIP(), []int{0}
 }
 
+type Location struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Latitude  float32 `protobuf:"fixed32,1,opt,name=latitude,proto3" json:"latitude,omitempty"`
+	Longitude float32 `protobuf:"fixed32,2,opt,name=longitude,proto3" json:"longitude,omitempty"`
+}
+
+func (x *Location) Reset() {
+	*x = Location{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_catalogueservice_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Location) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Location) ProtoMessage() {}
+
+func (x *Location) ProtoReflect() protoreflect.Message {
+	mi := &file_catalogueservice_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Location.ProtoReflect.Descriptor instead.
+func (*Location) Descriptor() ([]byte, []int) {
+	return file_catalogueservice_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Location) GetLatitude() float32 {
+	if x != nil {
+		return x.Latitude
+	}
+	return 0
+}
+
+func (x *Location) GetLongitude() float32 {
+	if x != nil {
+		return x.Longitude
+	}
+	return 0
+}
+
 type RestaurantRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name     string    `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Location *Location `protobuf:"bytes,2,opt,name=location,proto3" json:"location,omitempty"`
 }
 
 func (x *RestaurantRequest) Reset() {
 	*x = RestaurantRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_catalogueservice_proto_msgTypes[1]
+		mi := &file_catalogueservice_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -82,7 +138,7 @@ func (x *RestaurantRequest) String() string {
 func (*RestaurantRequest) ProtoMessage() {}
 
 func (x *RestaurantRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_catalogueservice_proto_msgTypes[1]
+	mi := &file_catalogueservice_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -95,7 +151,7 @@ func (x *RestaurantRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestaurantRequest.ProtoReflect.Descriptor instead.
 func (*RestaurantRequest) Descriptor() ([]byte, []int) {
-	return file_catalogueservice_proto_rawDescGZIP(), []int{1}
+	return file_catalogueservice_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *RestaurantRequest) GetName() string {
@@ -105,19 +161,27 @@ func (x *RestaurantRequest) GetName() string {
 	return ""
 }
 
+func (x *RestaurantRequest) GetLocation() *Location {
+	if x != nil {
+		return x.Location
+	}
+	return nil
+}
+
 type RestaurantResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id   int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Id       int64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name     string    `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Location *Location `protobuf:"bytes,3,opt,name=location,proto3" json:"location,omitempty"`
 }
 
 func (x *RestaurantResponse) Reset() {
 	*x = RestaurantResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_catalogueservice_proto_msgTypes[2]
+		mi := &file_catalogueservice_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -130,7 +194,7 @@ func (x *RestaurantResponse) String() string {
 func (*RestaurantResponse) ProtoMessage() {}
 
 func (x *RestaurantResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_catalogueservice_proto_msgTypes[2]
+	mi := &file_catalogueservice_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -143,7 +207,7 @@ func (x *RestaurantResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestaurantResponse.ProtoReflect.Descriptor instead.
 func (*RestaurantResponse) Descriptor() ([]byte, []int) {
-	return file_catalogueservice_proto_rawDescGZIP(), []int{2}
+	return file_catalogueservice_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *RestaurantResponse) GetId() int64 {
@@ -160,6 +224,13 @@ func (x *RestaurantResponse) GetName() string {
 	return ""
 }
 
+func (x *RestaurantResponse) GetLocation() *Location {
+	if x != nil {
+		return x.Location
+	}
+	return nil
+}
+
 type RestaurantIdRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -171,7 +242,7 @@ type RestaurantIdRequest struct {
 func (x *RestaurantIdRequest) Reset() {
 	*x = RestaurantIdRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_catalogueservice_proto_msgTypes[3]
+		mi := &file_catalogueservice_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -184,7 +255,7 @@ func (x *RestaurantIdRequest) String() string {
 func (*RestaurantIdRequest) ProtoMessage() {}
 
 func (x *RestaurantIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_catalogueservice_proto_msgTypes[3]
+	mi := &file_catalogueservice_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -197,7 +268,7 @@ func (x *RestaurantIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestaurantIdRequest.ProtoReflect.Descriptor instead.
 func (*RestaurantIdRequest) Descriptor() ([]byte, []int) {
-	return file_catalogueservice_proto_rawDescGZIP(), []int{3}
+	return file_catalogueservice_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *RestaurantIdRequest) GetId() int64 {
@@ -218,7 +289,7 @@ type RestaurantListResponse struct {
 func (x *RestaurantListResponse) Reset() {
 	*x = RestaurantListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_catalogueservice_proto_msgTypes[4]
+		mi := &file_catalogueservice_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -231,7 +302,7 @@ func (x *RestaurantListResponse) String() string {
 func (*RestaurantListResponse) ProtoMessage() {}
 
 func (x *RestaurantListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_catalogueservice_proto_msgTypes[4]
+	mi := &file_catalogueservice_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -244,7 +315,7 @@ func (x *RestaurantListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestaurantListResponse.ProtoReflect.Descriptor instead.
 func (*RestaurantListResponse) Descriptor() ([]byte, []int) {
-	return file_catalogueservice_proto_rawDescGZIP(), []int{4}
+	return file_catalogueservice_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *RestaurantListResponse) GetRestaurants() []*RestaurantResponse {
@@ -259,13 +330,14 @@ type ItemRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name  string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Price string `protobuf:"bytes,2,opt,name=price,proto3" json:"price,omitempty"`
 }
 
 func (x *ItemRequest) Reset() {
 	*x = ItemRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_catalogueservice_proto_msgTypes[5]
+		mi := &file_catalogueservice_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -278,7 +350,7 @@ func (x *ItemRequest) String() string {
 func (*ItemRequest) ProtoMessage() {}
 
 func (x *ItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_catalogueservice_proto_msgTypes[5]
+	mi := &file_catalogueservice_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -291,12 +363,19 @@ func (x *ItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemRequest.ProtoReflect.Descriptor instead.
 func (*ItemRequest) Descriptor() ([]byte, []int) {
-	return file_catalogueservice_proto_rawDescGZIP(), []int{5}
+	return file_catalogueservice_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ItemRequest) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *ItemRequest) GetPrice() string {
+	if x != nil {
+		return x.Price
 	}
 	return ""
 }
@@ -313,7 +392,7 @@ type ItemsListRequest struct {
 func (x *ItemsListRequest) Reset() {
 	*x = ItemsListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_catalogueservice_proto_msgTypes[6]
+		mi := &file_catalogueservice_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -326,7 +405,7 @@ func (x *ItemsListRequest) String() string {
 func (*ItemsListRequest) ProtoMessage() {}
 
 func (x *ItemsListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_catalogueservice_proto_msgTypes[6]
+	mi := &file_catalogueservice_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -339,7 +418,7 @@ func (x *ItemsListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemsListRequest.ProtoReflect.Descriptor instead.
 func (*ItemsListRequest) Descriptor() ([]byte, []int) {
-	return file_catalogueservice_proto_rawDescGZIP(), []int{6}
+	return file_catalogueservice_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ItemsListRequest) GetRestaurantId() int64 {
@@ -361,14 +440,15 @@ type ItemResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id   int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Id    int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name  string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Price string `protobuf:"bytes,3,opt,name=price,proto3" json:"price,omitempty"`
 }
 
 func (x *ItemResponse) Reset() {
 	*x = ItemResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_catalogueservice_proto_msgTypes[7]
+		mi := &file_catalogueservice_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -381,7 +461,7 @@ func (x *ItemResponse) String() string {
 func (*ItemResponse) ProtoMessage() {}
 
 func (x *ItemResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_catalogueservice_proto_msgTypes[7]
+	mi := &file_catalogueservice_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -394,7 +474,7 @@ func (x *ItemResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemResponse.ProtoReflect.Descriptor instead.
 func (*ItemResponse) Descriptor() ([]byte, []int) {
-	return file_catalogueservice_proto_rawDescGZIP(), []int{7}
+	return file_catalogueservice_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ItemResponse) GetId() int64 {
@@ -411,6 +491,13 @@ func (x *ItemResponse) GetName() string {
 	return ""
 }
 
+func (x *ItemResponse) GetPrice() string {
+	if x != nil {
+		return x.Price
+	}
+	return ""
+}
+
 type ItemsListResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -422,7 +509,7 @@ type ItemsListResponse struct {
 func (x *ItemsListResponse) Reset() {
 	*x = ItemsListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_catalogueservice_proto_msgTypes[8]
+		mi := &file_catalogueservice_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -435,7 +522,7 @@ func (x *ItemsListResponse) String() string {
 func (*ItemsListResponse) ProtoMessage() {}
 
 func (x *ItemsListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_catalogueservice_proto_msgTypes[8]
+	mi := &file_catalogueservice_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -448,7 +535,7 @@ func (x *ItemsListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemsListResponse.ProtoReflect.Descriptor instead.
 func (*ItemsListResponse) Descriptor() ([]byte, []int) {
-	return file_catalogueservice_proto_rawDescGZIP(), []int{8}
+	return file_catalogueservice_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ItemsListResponse) GetItems() []*ItemResponse {
@@ -463,32 +550,44 @@ var File_catalogueservice_proto protoreflect.FileDescriptor
 var file_catalogueservice_proto_rawDesc = []byte{
 	0x0a, 0x16, 0x63, 0x61, 0x74, 0x61, 0x6c, 0x6f, 0x67, 0x75, 0x65, 0x73, 0x65, 0x72, 0x76, 0x69,
 	0x63, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x0a, 0x0a, 0x08, 0x4e, 0x6f, 0x50, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x22, 0x27, 0x0a, 0x11, 0x52, 0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61,
-	0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
-	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x38, 0x0a,
-	0x12, 0x52, 0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52,
-	0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x25, 0x0a, 0x13, 0x52, 0x65, 0x73, 0x74, 0x61,
-	0x75, 0x72, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e,
-	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x22, 0x4f,
-	0x0a, 0x16, 0x52, 0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x4c, 0x69, 0x73, 0x74,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x35, 0x0a, 0x0b, 0x72, 0x65, 0x73, 0x74,
-	0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x13, 0x2e,
-	0x52, 0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x52, 0x0b, 0x72, 0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x73, 0x22,
-	0x21, 0x0a, 0x0b, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12,
-	0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61,
-	0x6d, 0x65, 0x22, 0x5a, 0x0a, 0x10, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4c, 0x69, 0x73, 0x74, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x22, 0x0a, 0x0c, 0x72, 0x65, 0x73, 0x74, 0x61, 0x75,
-	0x72, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x72, 0x65,
-	0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x22, 0x0a, 0x05, 0x69, 0x74,
-	0x65, 0x6d, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x49, 0x74, 0x65, 0x6d,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x22, 0x32,
-	0x0a, 0x0c, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e,
-	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12,
-	0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61,
-	0x6d, 0x65, 0x22, 0x38, 0x0a, 0x11, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4c, 0x69, 0x73, 0x74, 0x52,
+	0x72, 0x61, 0x6d, 0x73, 0x22, 0x44, 0x0a, 0x08, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x74, 0x69, 0x74, 0x75, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x02, 0x52, 0x08, 0x6c, 0x61, 0x74, 0x69, 0x74, 0x75, 0x64, 0x65, 0x12, 0x1c, 0x0a, 0x09,
+	0x6c, 0x6f, 0x6e, 0x67, 0x69, 0x74, 0x75, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52,
+	0x09, 0x6c, 0x6f, 0x6e, 0x67, 0x69, 0x74, 0x75, 0x64, 0x65, 0x22, 0x4e, 0x0a, 0x11, 0x52, 0x65,
+	0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x12, 0x25, 0x0a, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x09, 0x2e, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x5f, 0x0a, 0x12, 0x52, 0x65,
+	0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64,
+	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x25, 0x0a, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x09, 0x2e, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x52, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x25, 0x0a, 0x13, 0x52,
+	0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02,
+	0x69, 0x64, 0x22, 0x4f, 0x0a, 0x16, 0x52, 0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74,
+	0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x35, 0x0a, 0x0b,
+	0x72, 0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x13, 0x2e, 0x52, 0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x0b, 0x72, 0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61,
+	0x6e, 0x74, 0x73, 0x22, 0x37, 0x0a, 0x0b, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x22, 0x5a, 0x0a, 0x10,
+	0x49, 0x74, 0x65, 0x6d, 0x73, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x22, 0x0a, 0x0c, 0x72, 0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x49, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x72, 0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61,
+	0x6e, 0x74, 0x49, 0x64, 0x12, 0x22, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x18, 0x02, 0x20,
+	0x03, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x22, 0x48, 0x0a, 0x0c, 0x49, 0x74, 0x65, 0x6d,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05,
+	0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x70, 0x72, 0x69,
+	0x63, 0x65, 0x22, 0x38, 0x0a, 0x11, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x4c, 0x69, 0x73, 0x74, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x23, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73,
 	0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73,
 	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x32, 0xa6, 0x01, 0x0a,
@@ -527,37 +626,40 @@ func file_catalogueservice_proto_rawDescGZIP() []byte {
 	return file_catalogueservice_proto_rawDescData
 }
 
-var file_catalogueservice_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_catalogueservice_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_catalogueservice_proto_goTypes = []interface{}{
 	(*NoParams)(nil),               // 0: NoParams
-	(*RestaurantRequest)(nil),      // 1: RestaurantRequest
-	(*RestaurantResponse)(nil),     // 2: RestaurantResponse
-	(*RestaurantIdRequest)(nil),    // 3: RestaurantIdRequest
-	(*RestaurantListResponse)(nil), // 4: RestaurantListResponse
-	(*ItemRequest)(nil),            // 5: ItemRequest
-	(*ItemsListRequest)(nil),       // 6: ItemsListRequest
-	(*ItemResponse)(nil),           // 7: ItemResponse
-	(*ItemsListResponse)(nil),      // 8: ItemsListResponse
+	(*Location)(nil),               // 1: Location
+	(*RestaurantRequest)(nil),      // 2: RestaurantRequest
+	(*RestaurantResponse)(nil),     // 3: RestaurantResponse
+	(*RestaurantIdRequest)(nil),    // 4: RestaurantIdRequest
+	(*RestaurantListResponse)(nil), // 5: RestaurantListResponse
+	(*ItemRequest)(nil),            // 6: ItemRequest
+	(*ItemsListRequest)(nil),       // 7: ItemsListRequest
+	(*ItemResponse)(nil),           // 8: ItemResponse
+	(*ItemsListResponse)(nil),      // 9: ItemsListResponse
 }
 var file_catalogueservice_proto_depIdxs = []int32{
-	2, // 0: RestaurantListResponse.restaurants:type_name -> RestaurantResponse
-	5, // 1: ItemsListRequest.items:type_name -> ItemRequest
-	7, // 2: ItemsListResponse.items:type_name -> ItemResponse
-	1, // 3: RestaurantService.Create:input_type -> RestaurantRequest
-	3, // 4: RestaurantService.Get:input_type -> RestaurantIdRequest
-	0, // 5: RestaurantService.GetAll:input_type -> NoParams
-	6, // 6: MenuItemsService.CreateMultiple:input_type -> ItemsListRequest
-	3, // 7: MenuItemsService.GetByRestaurantId:input_type -> RestaurantIdRequest
-	2, // 8: RestaurantService.Create:output_type -> RestaurantResponse
-	2, // 9: RestaurantService.Get:output_type -> RestaurantResponse
-	4, // 10: RestaurantService.GetAll:output_type -> RestaurantListResponse
-	8, // 11: MenuItemsService.CreateMultiple:output_type -> ItemsListResponse
-	8, // 12: MenuItemsService.GetByRestaurantId:output_type -> ItemsListResponse
-	8, // [8:13] is the sub-list for method output_type
-	3, // [3:8] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	1,  // 0: RestaurantRequest.location:type_name -> Location
+	1,  // 1: RestaurantResponse.location:type_name -> Location
+	3,  // 2: RestaurantListResponse.restaurants:type_name -> RestaurantResponse
+	6,  // 3: ItemsListRequest.items:type_name -> ItemRequest
+	8,  // 4: ItemsListResponse.items:type_name -> ItemResponse
+	2,  // 5: RestaurantService.Create:input_type -> RestaurantRequest
+	4,  // 6: RestaurantService.Get:input_type -> RestaurantIdRequest
+	0,  // 7: RestaurantService.GetAll:input_type -> NoParams
+	7,  // 8: MenuItemsService.CreateMultiple:input_type -> ItemsListRequest
+	4,  // 9: MenuItemsService.GetByRestaurantId:input_type -> RestaurantIdRequest
+	3,  // 10: RestaurantService.Create:output_type -> RestaurantResponse
+	3,  // 11: RestaurantService.Get:output_type -> RestaurantResponse
+	5,  // 12: RestaurantService.GetAll:output_type -> RestaurantListResponse
+	9,  // 13: MenuItemsService.CreateMultiple:output_type -> ItemsListResponse
+	9,  // 14: MenuItemsService.GetByRestaurantId:output_type -> ItemsListResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_catalogueservice_proto_init() }
@@ -579,7 +681,7 @@ func file_catalogueservice_proto_init() {
 			}
 		}
 		file_catalogueservice_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RestaurantRequest); i {
+			switch v := v.(*Location); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -591,7 +693,7 @@ func file_catalogueservice_proto_init() {
 			}
 		}
 		file_catalogueservice_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RestaurantResponse); i {
+			switch v := v.(*RestaurantRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -603,7 +705,7 @@ func file_catalogueservice_proto_init() {
 			}
 		}
 		file_catalogueservice_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RestaurantIdRequest); i {
+			switch v := v.(*RestaurantResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -615,7 +717,7 @@ func file_catalogueservice_proto_init() {
 			}
 		}
 		file_catalogueservice_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RestaurantListResponse); i {
+			switch v := v.(*RestaurantIdRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -627,7 +729,7 @@ func file_catalogueservice_proto_init() {
 			}
 		}
 		file_catalogueservice_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ItemRequest); i {
+			switch v := v.(*RestaurantListResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -639,7 +741,7 @@ func file_catalogueservice_proto_init() {
 			}
 		}
 		file_catalogueservice_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ItemsListRequest); i {
+			switch v := v.(*ItemRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -651,7 +753,7 @@ func file_catalogueservice_proto_init() {
 			}
 		}
 		file_catalogueservice_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ItemResponse); i {
+			switch v := v.(*ItemsListRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -663,6 +765,18 @@ func file_catalogueservice_proto_init() {
 			}
 		}
 		file_catalogueservice_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ItemResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_catalogueservice_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ItemsListResponse); i {
 			case 0:
 				return &v.state
@@ -681,7 +795,7 @@ func file_catalogueservice_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_catalogueservice_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   2,
 		},
